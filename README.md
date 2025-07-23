@@ -1,14 +1,17 @@
-# LAHYL
+<h1 align="center">
 
-<img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/80bb1996-209c-4821-b376-051986fb9f45" />
+<img width="256" alt="Image" src="https://github.com/user-attachments/assets/80bb1996-209c-4821-b376-051986fb9f45" />
+<br/>
+LAHYL
+</h1>
 
-Let AI Handle Your Look！（外見なんか AI に任せとけ）
+<br>
 
-# 説明
+### Let AI Handle Your Look！（外見なんか AI に任せとけ）
 
 Stable Diffusion で作ったストリートスナップを見て楽しむファッションコーディネートサイト
 
-# アーキテクチャ
+## アーキテクチャ
 
 <img width="500" alt="Image" src="https://github.com/user-attachments/assets/5975d933-8d71-45af-a24d-bb7e9f651aeb" />
 
