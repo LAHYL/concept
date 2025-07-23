@@ -36,6 +36,6 @@ Stable Diffusion で作ったストリートスナップを見て楽しむファ
   - Cloudflare
 
 - AI
-  - Stable Diffusion
+  - Stable Diffusion(Realistic_Vision_V5)
   - Conoha VPS
   - Python
