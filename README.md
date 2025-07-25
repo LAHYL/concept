@@ -1,6 +1,6 @@
 <h1 align="center">
 
-<img width="256" alt="Image" src="https://github.com/user-attachments/assets/80bb1996-209c-4821-b376-051986fb9f45" />
+<img width="256" alt="Image" src="https://github.com/user-attachments/assets/52df7212-bdff-4bf8-b66b-258c54367fa7" />
 <br/>
 Let AI Handle Your Look!(外見なんか AI に任せとけ)
 </h1>
