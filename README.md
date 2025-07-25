@@ -64,12 +64,12 @@ graph TD
 - フロントエンド
 
   - Cloudflare Pages(SSR)
-  - Next.js or Nuxt
+  - Next.js
 
 - バックエンド
 
-  - Cloud Run
-  - C#
+  - Cloudflare Workers
+  - Hono
 
 - DB
 
@@ -86,5 +86,4 @@ graph TD
 
 - AI
   - Stable Diffusion(Realistic_Vision_V5)
-  - Conoha VPS
   - Python
