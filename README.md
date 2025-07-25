@@ -15,45 +15,47 @@ Stable Diffusion で作ったストリートスナップを見て楽しむファ
 graph TD
 
   %% ==== User ====
-  User["🧑‍💻 ユーザー"]
-  User -->|アクセス| CF
+  User["🧑‍💻 User"]
+  User --> CF
 
   %% ==== Frontend ====
-  subgraph フロントエンド
+  subgraph "🖥️ Web"
     CF["🌐 Cloudflare (CDN)"]
     Pages["📄 Cloudflare Pages (SSR)"]
-    Framework["🧱 Next.js / Nuxt"]
+    Framework["🧱 Next.js"]
     CF --> Pages
     Pages --> Framework
   end
 
   %% ==== Backend ====
-  subgraph バックエンド
-    CloudRun["☁️ Cloud Run"]
-    CSharp["💻 C# (API)"]
-    Framework -->|API Request| CloudRun
-    CloudRun --> CSharp
-    CSharp -->|"Search / Prompt"| ESNode
+  subgraph "🔧 Api"
+    Workers["⚙️ Cloudflare Workers"]
+    Hono["🛠️ Hono (API)"]
+    Framework -->|API Request| Workers
+    Workers --> Hono
   end
 
-  %% ==== Elasticsearch on VPS ====
-  ESNode["🖥️ Conoha VPS (Elasticsearch)"]
+  %% ==== DB ====
+  subgraph "🗄️ Database"
+    ESNode["🖥️ Conoha VPS (Elasticsearch)"]
+  end
+
+  Hono -->|"Search"| ESNode
 
   %% ==== Storage ====
-  subgraph ストレージ
+  subgraph "💾 Storage"
     R2["🗂️ Cloudflare R2"]
   end
 
   %% ==== AI ====
-  subgraph AI
-    ConohaAI["🧠 Conoha VPS (AI)"]
+  subgraph "🧠 AI Server"
     SD["🎨 Stable Diffusion"]
     Python["🐍 Python"]
-    ESNode -->|Prompt| Python
-    ConohaAI --> SD
     SD --> Python
-    Python -->|Upload| R2
   end
+
+  ESNode -->|Prompt| Python
+  Python -->|Upload| R2
 
   %% CDN - R2 Cache
   CF -->|CDN Cache| R2
