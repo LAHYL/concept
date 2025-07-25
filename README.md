@@ -11,36 +11,6 @@ Stable Diffusion で作ったストリートスナップを見て楽しむファ
 
 ## アーキテクチャ
 
-<img width="500" alt="Image" src="https://github.com/user-attachments/assets/5975d933-8d71-45af-a24d-bb7e9f651aeb" />
-
-- フロントエンド
-
-  - Cloudflare Pages(SSR)
-  - Next.js or Nuxt
-
-- バックエンド
-
-  - Cloud Run
-  - C#
-
-- DB
-
-  - Elasticsearch
-  - Conoha VPS
-
-- ストレージ
-
-  - Cloudflare R2
-
-- CDN
-
-  - Cloudflare
-
-- AI
-  - Stable Diffusion(Realistic_Vision_V5)
-  - Conoha VPS
-  - Python
-
 ```mermaid
 graph TD
 
@@ -88,3 +58,31 @@ graph TD
   %% CDN - R2 Cache
   CF -->|CDN Cache| R2
 ```
+
+- フロントエンド
+
+  - Cloudflare Pages(SSR)
+  - Next.js or Nuxt
+
+- バックエンド
+
+  - Cloud Run
+  - C#
+
+- DB
+
+  - Elasticsearch
+  - Conoha VPS
+
+- ストレージ
+
+  - Cloudflare R2
+
+- CDN
+
+  - Cloudflare
+
+- AI
+  - Stable Diffusion(Realistic_Vision_V5)
+  - Conoha VPS
+  - Python
