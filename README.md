@@ -31,10 +31,10 @@ graph TD
   %% ==== Frontend ====
   subgraph "🖥️ Web"
     CF["🌐 Cloudflare (CDN)"]
-    Pages["📄 Cloudflare Pages (SSR)"]
+    Workers["📄 Cloudflare Workers (SSR)"]
     Framework["🧱 Next.js"]
-    CF --> Pages
-    Pages --> Framework
+    CF --> Workers
+    Workers --> Framework
   end
 
   %% ==== Backend ====
@@ -73,7 +73,7 @@ graph TD
 
 - フロントエンド
 
-  - Cloudflare Pages(SSR)
+  - Cloudflare Workers(SSR)
   - Next.js
 
 - バックエンド
