@@ -11,7 +11,7 @@ Stable Diffusion で作ったストリートスナップを見て楽しむファ
 
 ## 特徴
 
-- **運用要らず 😴** 毎日自動で 20〜30 種類※のコーディネイトが追加される
+- **運用要らず 😴** 毎日自動で 40 種類以上※のコーディネイトが追加される
 - **探したいものがすぐ見つかる 🔍** 画像生成に使用したプロンプトの内容を日本語でそのまま検索できる
   _（例：夏ファッション / T シャツ / ハーフパンツ など）_
 - **検索が爆速 ⚡️** 高速検索エンジン Elasticsearch を使用しており、ストレスフリーな体験
@@ -23,77 +23,41 @@ Stable Diffusion で作ったストリートスナップを見て楽しむファ
 
 ```mermaid
 graph TD
+    U[👤 ユーザー]
 
-  %% ==== User ====
-  User["🧑‍💻 User"]
-  User --> CF
+    subgraph Frontend["🌐 Frontend"]
+        FE[⚛️ Next.js（Cloudflare Workers）]
+    end
 
-  %% ==== Frontend ====
-  subgraph "🖥️ Web"
-    CF["🌐 Cloudflare (CDN)"]
-    Workers["📄 Cloudflare Workers (SSR)"]
-    Framework["🧱 Next.js"]
-    CF --> Workers
-    Workers --> Framework
-  end
+    subgraph Backend["🖥️ Backend"]
+        BE[🚀 Hono（Cloudflare Workers）]
+    end
 
-  %% ==== Backend ====
-  subgraph "🔧 Api"
-    Workers["⚙️ Cloudflare Workers"]
-    Hono["🛠️ Hono (API)"]
-    Framework -->|API Request| Workers
-    Workers --> Hono
-  end
+    subgraph Database["💾 Database"]
+        DB[(🔍 Elasticsearch（ConoHa VPS）)]
+    end
 
-  %% ==== DB ====
-  subgraph "🗄️ Database"
-    ESNode["🖥️ Conoha VPS (Elasticsearch)"]
-  end
+    subgraph AI["🤖 画像生成AIサーバー"]
+        PY[🐍 Python（Kaggle Notebooks）]
+    end
 
-  Hono -->|"Search"| ESNode
+    subgraph Storage["🗄️ Storage"]
+        ST[☁️ Cloudflare R2]
+    end
 
-  %% ==== Storage ====
-  subgraph "💾 Storage"
-    R2["🗂️ Cloudflare R2"]
-  end
-
-  %% ==== AI ====
-  subgraph "🧠 AI Server"
-    SD["🎨 Stable Diffusion"]
-    Python["🐍 Python"]
-    SD --> Python
-  end
-
-  ESNode -->|Prompt| Python
-  Python -->|Upload| R2
-
-  %% CDN - R2 Cache
-  CF -->|CDN Cache| R2
+    %% Connections
+    U --> FE
+    FE --> BE
+    BE --> DB
+    ST --> FE
+    BE --> PY
+    PY --> ST
 ```
 
-- フロントエンド
+- **Frontend**: Next.js（Cloudflare Workers）
+- **Backend**: Hono（Cloudflare Workers）
+- **Database**: Elasticsearch（ConoHa VPS）
+- **AI Server**: Python + Juggernaut-XL（Kaggle Notebooks）
+- **Storage**: Cloudflare R2
 
-  - Cloudflare Workers(SSR)
-  - Next.js
-
-- バックエンド
-
-  - Cloudflare Workers
-  - Hono
-
-- DB
-
-  - Elasticsearch
-  - Conoha VPS
-
-- ストレージ
-
-  - Cloudflare R2
-
-- CDN
-
-  - Cloudflare
-
-- AI
-  - Stable Diffusion(Realistic_Vision_V5)
-  - Python
+ユーザー → Frontend → Backend を経由して、DB・AI・ストレージと連携し、生成画像は R2 に保存・配信されます。
